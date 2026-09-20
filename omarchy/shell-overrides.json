@@ -1,0 +1,77 @@
+{
+  "bar": {
+    "layout": {
+      "left": [
+        { "id": "omarchy.menu" },
+        { "id": "omarchy.workspaces" }
+      ],
+      "center": [
+        { "id": "omarchy.indicators" },
+        { "id": "omarchy.microphone" },
+        {
+          "id": "omarchy.clock",
+          "format": "dddd HH:mm",
+          "formatAlt": "d MMMM 'W'ww yyyy",
+          "verticalFormat": "HH\n—\nmm",
+          "birthYear": 0,
+          "lifeExpectancy": 60
+        },
+        { "id": "omarchy.keyboard-layout" },
+        { "id": "omarchy.weather" },
+        { "id": "omarchy.system-update" },
+        {
+          "id": "io.github.sspaeti.timezones",
+          "homeZones": ["Europe/Warsaw"],
+          "zones": [
+            { "label": "Poland", "shortLabel": "PL", "zone": "", "home": true },
+            { "label": "Eastern US", "shortLabel": "EDT/EST", "zone": "America/New_York" },
+            { "label": "Pacific US", "shortLabel": "PDT/PST", "zone": "America/Los_Angeles" },
+            { "label": "India", "shortLabel": "IN", "zone": "Asia/Kolkata", "abbr": "IST" },
+            { "label": "China", "shortLabel": "CN", "zone": "Asia/Shanghai", "abbr": "CN" }
+          ]
+        }
+      ],
+      "right": [
+        {
+          "id": "io.github.tyrichards.tray",
+          "order": [
+            "io.github.grichard99.omaproton-vpn",
+            "ssandys.galley",
+            "dizziee.system-updates"
+          ],
+          "widgets": [
+            {
+              "entry": { "id": "io.github.grichard99.omaproton-vpn", "refreshIntervalSec": 3600 },
+              "listed": true
+            },
+            { "entry": { "id": "ssandys.galley" }, "listed": true },
+            { "entry": { "id": "dizziee.system-updates" }, "listed": true }
+          ],
+          "hidden": [],
+          "showTrayIcons": true
+        },
+        { "id": "omarchy.agents" },
+        {
+          "id": "io.github.pjgeutjens.clockwork",
+          "pomodoroSound": true,
+          "pomodoroWorkMinutes": 25,
+          "pomodoroCycles": 2,
+          "pomodoroShortBreakMinutes": 5,
+          "alarmUses12Hour": false
+        },
+        { "id": "omarchy.bluetooth" },
+        { "id": "omarchy.network" },
+        { "id": "omarchy.audio" },
+        { "id": "omarchy.monitor" },
+        { "id": "omarchy.power", "showPercentage": true },
+        { "id": "jankeesvw.notification-center" }
+      ]
+    }
+  },
+  "plugins": [
+    { "id": "io.github.grichard99.omaproton-vpn" },
+    { "id": "omarchy.agents" },
+    { "id": "ssandys.galley" },
+    { "id": "dizziee.system-updates" }
+  ]
+}

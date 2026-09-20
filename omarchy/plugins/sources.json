@@ -1,0 +1,30 @@
+[
+  {
+    "id": "dizziee.system-updates",
+    "url": "https://github.com/JJDizz1L/dizziee.system-updates.git"
+  },
+  {
+    "id": "io.github.grichard99.omaproton-vpn",
+    "url": "https://github.com/grichard99/omaproton-vpn.git"
+  },
+  {
+    "id": "io.github.pjgeutjens.clockwork",
+    "url": "https://github.com/pjgeutjens/omarchy-clockwork.git"
+  },
+  {
+    "id": "io.github.sspaeti.timezones",
+    "url": "https://github.com/sspaeti/omarchy-timezones-plugin.git"
+  },
+  {
+    "id": "io.github.tyrichards.tray",
+    "url": "https://github.com/TyRichards/omarchy-tray.git"
+  },
+  {
+    "id": "jankeesvw.notification-center",
+    "url": "https://github.com/jankeesvw/omarchy-notification-center.git"
+  },
+  {
+    "id": "ssandys.galley",
+    "url": "https://github.com/ssandys/galley.git"
+  }
+]
