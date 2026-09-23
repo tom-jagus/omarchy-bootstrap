@@ -1,0 +1,29 @@
+{
+  "install": {
+    "repo": [
+      "vivaldi",
+      "discord",
+      "proton-vpn-cli",
+      "spotify-player",
+      "gimp",
+      "yazi",
+      "7zip",
+      "herdr",
+      "cliamp"
+    ],
+    "aur": [
+      "proton-meet-bin",
+      "proton-pass-bin",
+      "vial-appimage",
+      "zoom"
+    ]
+  },
+  "remove": [
+    "moonlight-qt",
+    "obsidian",
+    "omawrite",
+    "pinta",
+    "tmux",
+    "xournalpp"
+  ]
+}

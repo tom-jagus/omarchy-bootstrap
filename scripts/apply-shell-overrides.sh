@@ -17,7 +17,7 @@ fi
 command -v jq >/dev/null || { echo 'Required command missing: jq' >&2; exit 1; }
 
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
-overrides="$script_dir/../shell-overrides.json"
+overrides="$script_dir/../config/shell-overrides.json"
 target=${1:-${XDG_CONFIG_HOME:-$HOME/.config}/omarchy/shell.json}
 
 # Do not accidentally replace a symlink managed by a dotfiles tool.

@@ -5,7 +5,7 @@ set -euo pipefail
 
 if [[ ${1:-} == --help || ${1:-} == -h ]]; then
   echo 'Usage: setup-shell.sh'
-  echo 'Installs missing plugins, patches the tray, then applies shell overrides.'
+  echo 'Installs plugins, patches the tray, applies shell overrides, then removes unwanted plugins.'
   exit 0
 fi
 (( $# == 0 )) || { echo 'Unexpected arguments.' >&2; exit 1; }
@@ -26,6 +26,10 @@ shell_config="$HOME/.config/omarchy/shell.json"
 jq -e -s 'length == 1 and (.[0] | type == "object")' "$shell_config" >/dev/null
 
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
-bash "$script_dir/scripts/install-plugins.sh"
-bash "$script_dir/scripts/patch-tray.sh"
-bash "$script_dir/scripts/apply-shell-overrides.sh" "$shell_config"
+bash "$script_dir/validate-config.sh"
+bash "$script_dir/setup-plugins.sh"
+if jq -e 'any(.install[]; .id == "io.github.tyrichards.tray")' "$script_dir/../config/plugins.json" >/dev/null; then
+  bash "$script_dir/patch-tray.sh"
+fi
+bash "$script_dir/apply-shell-overrides.sh" "$shell_config"
+bash "$script_dir/remove-plugins.sh"

@@ -4,7 +4,8 @@
 # mise package mapping and preference file without calling that setter.
 set -euo pipefail
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
-source "$script_dir/../defaults.conf"
+bash "$script_dir/validate-config.sh"
+AGENT=$(jq -r '.agent' "$script_dir/../config/defaults.json")
 
 case "$AGENT" in
   pi|opencode|claude|codex|crush|gemini|copilot|cursor-agent) package=$AGENT ;;

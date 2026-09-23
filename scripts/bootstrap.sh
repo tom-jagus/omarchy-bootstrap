@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Download this file from a specific Git commit, inspect it, then execute with
-# --ref <the same full commit hash>. Do not pipe into Bash: setup needs stdin.
+# Optional standalone bootstrap: download scripts/bootstrap.sh from a specific
+# commit, inspect it, then pass --ref with that hash. Do not pipe into Bash.
 set -euo pipefail
 
 fail() { printf 'bootstrap: %s\n' "$*" >&2; exit 1; }
@@ -49,8 +49,8 @@ fi
 
 # The downloaded entry point must match the pinned checkout, preventing an
 # accidental mix of entry-point and setup versions. This is not signature verification.
-[[ -f $checkout/bootstrap.sh && ! -L $checkout/bootstrap.sh ]] || fail 'Pinned commit has no regular bootstrap.sh.'
-cmp -s -- "$entry" "$checkout/bootstrap.sh" || fail 'Downloaded entry point differs from the requested commit. Download it from that commit and retry.'
+[[ -f $checkout/scripts/bootstrap.sh && ! -L $checkout/scripts/bootstrap.sh ]] || fail 'Pinned commit has no regular scripts/bootstrap.sh.'
+cmp -s -- "$entry" "$checkout/scripts/bootstrap.sh" || fail 'Downloaded entry point differs from the requested commit. Download it from that commit and retry.'
 [[ -f $checkout/setup.sh && ! -L $checkout/setup.sh ]] || fail 'Pinned commit has no regular setup.sh.'
 
 if [[ -n $stage ]]; then

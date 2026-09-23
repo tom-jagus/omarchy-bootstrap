@@ -2,12 +2,10 @@
 # This repository only obtains the dotfiles and delegates their integration.
 set -euo pipefail
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
-source_file="$script_dir/../hypr-source.json"
-jq -e -s 'length == 1 and (.[0] | type == "object" and
-  (.url | type == "string" and test("^https://github\\.com/[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+\\.git$")) and
-  (.ref | type == "string" and test("^[a-zA-Z0-9][a-zA-Z0-9._/-]*$")))' "$source_file" >/dev/null
-url=$(jq -r '.url' "$source_file")
-ref=$(jq -r '.ref' "$source_file")
+bash "$script_dir/validate-config.sh"
+source_file="$script_dir/../config/defaults.json"
+url=$(jq -r '.hypr.url' "$source_file")
+ref=$(jq -r '.hypr.ref' "$source_file")
 target="$HOME/src/personal/omarchy-hypr-dotfiles"
 mkdir -p -- "$HOME/src/personal"
 stage=''

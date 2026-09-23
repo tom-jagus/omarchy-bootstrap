@@ -3,7 +3,8 @@
 # Run as the desktop user, never via sudo.
 set -euo pipefail
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
-source "$script_dir/../defaults.conf"
+bash "$script_dir/validate-config.sh"
+DICTATION=$(jq -r '.dictation' "$script_dir/../config/defaults.json")
 
 bash "$script_dir/setup-agent.sh"
 
@@ -23,6 +24,6 @@ case "$DICTATION" in
       }
     fi
     ;;
-  false) echo 'Dictation setup disabled in defaults.conf.' ;;
+  false) echo 'Dictation setup disabled in config/defaults.json.' ;;
   *) echo 'DICTATION must be true or false.' >&2; exit 1 ;;
 esac

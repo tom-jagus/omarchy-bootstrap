@@ -1,0 +1,20 @@
+{
+  "install": [
+    { "name": "Google Maps", "url": "https://maps.google.com", "icon": "google-maps" },
+    { "name": "X", "url": "https://x.com/", "icon": "x" },
+    { "name": "YouTube", "url": "https://youtube.com/", "icon": "youtube" },
+    { "name": "ChatGPT", "url": "https://chatgpt.com", "icon": "applications-internet" },
+    { "name": "Proton Mail", "url": "https://mail.proton.me", "icon": "applications-internet" },
+    { "name": "Proton Calendar", "url": "https://calendar.proton.me", "icon": "applications-internet" }
+  ],
+  "remove": [
+    "Basecamp",
+    "Discord",
+    "HEY",
+    "Google Contacts",
+    "Google Messages",
+    "Google Photos",
+    "WhatsApp",
+    "Zoom"
+  ]
+}

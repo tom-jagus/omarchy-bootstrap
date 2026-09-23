@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # Install missing plugins using Omarchy's validated installer, without enabling
 # them or updating existing checkouts. Plugin code runs unsandboxed: only list
-# trusted repositories in plugins/sources.json. New installs use upstream's current HEAD.
+# trusted repositories in config/plugins.json. New installs use upstream's current HEAD.
 set -euo pipefail
 
 if [[ ${1:-} == --help || ${1:-} == -h ]]; then
-  echo 'Usage: install-plugins.sh (installs missing entries from plugins/sources.json)'
+  echo 'Usage: setup-plugins.sh (installs missing entries from config/plugins.json)'
   exit 0
 fi
 (( $# == 0 )) || { echo 'Unexpected arguments.' >&2; exit 1; }
@@ -17,17 +17,9 @@ script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 # Omarchy's plugin installer currently uses this path, not XDG_CONFIG_HOME.
 plugins_dir="$HOME/.config/omarchy/plugins"
 
-sources="$script_dir/../plugins/sources.json"
-# Validate the entire document before cloning any plugin.
-jq -e -s '
-  length == 1 and (.[0] |
-    type == "array" and
-    all(.[]; type == "object" and
-      (.id | type == "string" and test("^[a-zA-Z0-9][a-zA-Z0-9._-]*$")) and
-      (.url | type == "string" and test("^https://github\\.com/[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+\\.git$"))) and
-    (map(.id) | length == (unique | length)))
-' "$sources" >/dev/null
-entries=$(jq -c '.[]' "$sources")
+bash "$script_dir/validate-config.sh"
+sources="$script_dir/../config/plugins.json"
+entries=$(jq -c '.install[]' "$sources")
 while IFS= read -r entry; do
   [[ -n $entry ]] || continue
   id=$(jq -r '.id' <<< "$entry")

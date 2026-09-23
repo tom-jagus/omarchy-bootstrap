@@ -22,18 +22,21 @@ done
   echo 'Expected the fresh-install shell.json, not a missing file or symlink.' >&2; exit 1;
 }
 
+# Fail on malformed preferences before touching the machine.
+bash "$root/scripts/validate-config.sh"
+
 # Also prepare the layout when setup.sh is run directly from a manual clone.
 bash "$root/scripts/setup-directories.sh"
 
-printf 'Applying the checked-in package lists, defaults, webapps, and desktop configuration.\n'
-printf 'No extra confirmations: sudo authorization and dictation setup may require input.\n'
+printf 'Applying the checked-in packages, defaults, webapps, and desktop configuration.\n'
+printf 'Sudo, dictation setup, and package removal confirmation may require input.\n'
 sudo -v
 
-bash "$root/omarchy/scripts/setup-onboarding.sh"
-bash "$root/packages/scripts/install.sh"
-bash "$root/omarchy/scripts/setup-defaults.sh"
-bash "$root/packages/scripts/remove.sh"
-bash "$root/omarchy/scripts/setup-webapps.sh"
-bash "$root/omarchy/setup-shell.sh"
-bash "$root/omarchy/scripts/setup-hypr.sh"
+bash "$root/scripts/setup-onboarding.sh"
+bash "$root/scripts/setup-packages.sh"
+bash "$root/scripts/setup-defaults.sh"
+bash "$root/scripts/remove-packages.sh"
+bash "$root/scripts/setup-webapps.sh"
+bash "$root/scripts/setup-shell.sh"
+bash "$root/scripts/setup-hypr.sh"
 printf '\nApplication, shell, and Hyprland bootstrap complete. Log out and back in for autostart.\n'

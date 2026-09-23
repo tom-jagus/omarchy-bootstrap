@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
-source "$script_dir/../defaults.conf"
+bash "$script_dir/validate-config.sh"
+TERMINAL=$(jq -r '.terminal' "$script_dir/../config/defaults.json")
+BROWSER=$(jq -r '.browser' "$script_dir/../config/defaults.json")
 
 # Omarchy installs the terminal, creates its desktop integration, and selects it.
 omarchy install terminal "$TERMINAL"

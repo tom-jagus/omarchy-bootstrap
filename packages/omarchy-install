@@ -1,6 +1,0 @@
-# One supported Omarchy command per line, without the leading "omarchy".
-# Commands are parsed as arguments, never evaluated as shell code.
-install service signal
-# Optional native ChatGPT app (currently not selected):
-# install ai chatgpt
-# Terminal, agent, and dictation are selected in omarchy/defaults.conf.

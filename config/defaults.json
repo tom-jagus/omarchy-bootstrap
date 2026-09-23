@@ -1,0 +1,10 @@
+{
+  "agent": "pi",
+  "terminal": "alacritty",
+  "browser": "vivaldi",
+  "dictation": true,
+  "hypr": {
+    "url": "https://github.com/tom-jagus/omarchy-hypr-dotfiles.git",
+    "ref": "main"
+  }
+}
