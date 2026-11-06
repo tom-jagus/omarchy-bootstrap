@@ -6,7 +6,7 @@ set -euo pipefail
 fail() { printf 'bootstrap: %s\n' "$*" >&2; exit 1; }
 if [[ ${1:-} == --help || ${1:-} == -h ]]; then
   echo 'Usage: bash bootstrap.sh --ref <full-40-character-commit-hash>'
-  echo 'Clones/reuses ~/src/personal/omarchy-bootstrap and runs its setup.sh.'
+  echo 'Clones/reuses ~/src/default/omarchy-bootstrap and runs its setup.sh.'
   exit 0
 fi
 [[ $# == 2 && $1 == --ref && $2 =~ ^[0-9a-f]{40}$ ]] || fail 'Pass --ref followed by a full lowercase Git commit hash.'
@@ -22,9 +22,9 @@ done
 
 # Keep this tiny standalone step in sync with scripts/setup-directories.sh.
 # The entry point has not cloned that script yet.
-mkdir -p -- "$HOME/src/personal" "$HOME/dev/personal" "$HOME/dev/clients"
+mkdir -p -- "$HOME/src/default" "$HOME/dev/default" "$HOME/dev/clients"
 repository=https://github.com/tom-jagus/omarchy-bootstrap.git
-target="$HOME/src/personal/omarchy-bootstrap"
+target="$HOME/src/default/omarchy-bootstrap"
 entry=$(realpath -- "${BASH_SOURCE[0]}")
 stage=''
 trap 'if [[ -n $stage ]]; then rm -rf -- "$stage"; fi' EXIT
@@ -40,7 +40,7 @@ if [[ -e $target || -L $target ]]; then
   [[ -z $(git -C "$target" status --porcelain --untracked-files=all) ]] || fail 'Existing checkout has local changes. Preserve/review them before retrying.'
   checkout=$target
 else
-  stage=$(mktemp -d "$HOME/src/personal/.omarchy-bootstrap.XXXXXX")
+  stage=$(mktemp -d "$HOME/src/default/.omarchy-bootstrap.XXXXXX")
   GIT_TERMINAL_PROMPT=0 git clone --no-checkout -- "$repository" "$stage"
   git -C "$stage" -c advice.detachedHead=false checkout --detach "$revision"
   [[ $(git -C "$stage" rev-parse HEAD) == "$revision" ]] || fail 'Checkout does not match requested commit.'

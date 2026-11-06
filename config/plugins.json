@@ -27,6 +27,10 @@
     {
       "id": "ssandys.galley",
       "url": "https://github.com/ssandys/galley.git"
+    },
+    {
+      "id": "tomjagus.legacy-workspace-plus",
+      "url": "https://github.com/tom-jagus/legacy-workspace-plus.git"
     }
   ],
   "remove": []

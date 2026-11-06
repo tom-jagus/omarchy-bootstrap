@@ -6,8 +6,8 @@ bash "$script_dir/validate-config.sh"
 source_file="$script_dir/../config/defaults.json"
 url=$(jq -r '.hypr.url' "$source_file")
 ref=$(jq -r '.hypr.ref' "$source_file")
-target="$HOME/src/personal/omarchy-hypr-dotfiles"
-mkdir -p -- "$HOME/src/personal"
+target="$HOME/src/default/omarchy-hypr-dotfiles"
+mkdir -p -- "$HOME/src/default"
 stage=''
 trap 'if [[ -n $stage ]]; then rm -rf -- "$stage"; fi' EXIT
 
@@ -23,7 +23,7 @@ if [[ -e $target || -L $target ]]; then
   }
   echo "Reusing dotfiles checkout; local edits preserved: $target"
 else
-  stage=$(mktemp -d "$HOME/src/personal/.omarchy-hypr-dotfiles.XXXXXX")
+  stage=$(mktemp -d "$HOME/src/default/.omarchy-hypr-dotfiles.XXXXXX")
   GIT_TERMINAL_PROMPT=0 git clone -- "$url" "$stage"
   git -C "$stage" checkout "$ref"
   [[ -f $stage/setup.sh && ! -L $stage/setup.sh ]] || { echo 'Dotfiles ref has no setup.sh; publish the installer first.' >&2; exit 1; }

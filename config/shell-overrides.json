@@ -3,7 +3,7 @@
     "layout": {
       "left": [
         { "id": "omarchy.menu" },
-        { "id": "omarchy.workspaces" }
+        { "id": "tomjagus.legacy-workspace-plus" }
       ],
       "center": [
         { "id": "omarchy.indicators" },
